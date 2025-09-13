@@ -1,32 +1,29 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    android:background="@android:color/white">
+    tools:context=".TasksActivity">
 
     <TextView
         android:id="@+id/tvTasksTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="قائمة المهام"
-        android:textSize="22sp"
+        android:text="Tasks List / 任务列表"
+        android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@android:color/black"
         android:layout_marginBottom="16dp"/>
 
-    <ListView
-        android:id="@+id/lvTasks"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerTasks"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:divider="@android:color/darker_gray"
-        android:dividerHeight="1dp"/>
+        android:layout_weight="1"/>
 
     <Button
         android:id="@+id/btnAddTask"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="إضافة مهمة جديدة"/>
+        android:text="Add Task / 添加任务"/>
 </LinearLayout>
