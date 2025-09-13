@@ -1,9 +1,8 @@
 package com.parentjoy
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
@@ -11,13 +10,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // نلقاو الزر "ابدأ"
         val btnStart = findViewById<Button>(R.id.btnStart)
-        val appTitle = findViewById<TextView>(R.id.appTitle)
 
+        // كي يضغط المستخدم على الزر يفتح شاشة المهام
         btnStart.setOnClickListener {
-            // يغير نص الـ TextView ويعرض Toast
-            appTitle.text = "تجربة ناجحة — اضغت الزر ✅"
-            Toast.makeText(this, "تم الضغط", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, TasksActivity::class.java)
+            startActivity(intent)
         }
     }
 }
