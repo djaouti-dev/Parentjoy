@@ -1,4 +1,4 @@
-name: Android Build (no wrapper)
+name: Android Build
 
 on:
   push:
@@ -15,43 +15,26 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v3
         with:
-          distribution: temurin
-          java-version: 17
-
-      - name: Install Gradle (system package)
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y unzip wget tar
-          sudo apt-get install -y gradle || true
-          if ! command -v gradle >/dev/null 2>&1; then
-            echo "gradle not found via apt, installing manually..."
-            VER=8.4
-            wget https://services.gradle.org/distributions/gradle-${VER}-bin.zip -O /tmp/gradle.zip
-            sudo unzip -d /opt/gradle /tmp/gradle.zip
-            sudo ln -s /opt/gradle/gradle-${VER}/bin/gradle /usr/local/bin/gradle
-          fi
-          gradle -v
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
 
       - name: Build Debug APK
-        run: gradle :app:assembleDebug
-        env:
-          _JAVA_OPTIONS: "-Xmx2g"
+        run: cd parentjoy && ./gradlew assembleDebug
 
-      - name: Upload debug APK
+      - name: Upload Debug APK
         uses: actions/upload-artifact@v4
         with:
           name: parentjoy-apk
-          path: app/build/outputs/apk/debug/app-debug.apk
+          path: parentjoy/app/build/outputs/apk/debug/app-debug.apk
 
       - name: Build Release AAB
-        run: gradle :app:bundleRelease
-        env:
-          _JAVA_OPTIONS: "-Xmx2g"
+        run: cd parentjoy && ./gradlew bundleRelease
 
-      - name: Upload release AAB
+      - name: Upload Release AAB
         uses: actions/upload-artifact@v4
         with:
           name: parentjoy-aab
-          path: app/build/outputs/bundle/release/*.aab
+          path: parentjoy/app/build/outputs/bundle/release/*.aab
