@@ -1,8 +1,7 @@
 @echo off
+:: -------------------------------------------------------------
 :: Gradle startup script for Windows
-
-@if "%DEBUG%" == "" @echo off
-@setlocal
+:: -------------------------------------------------------------
 
 set DIRNAME=%~dp0
 if "%DIRNAME%" == "" set DIRNAME=.
@@ -33,14 +32,11 @@ echo ERROR: JAVA_HOME is set to an invalid directory: %JAVA_HOME%
 goto fail
 
 :init
-set CLASSPATH=%APP_HOME%\gradle\wrapper\gradle-wrapper.jar
-
-"%JAVA_EXE%" %DEFAULT_JVM_OPTS% -classpath "%CLASSPATH%" org.gradle.wrapper.GradleWrapperMain %*
-
-:end
-@endlocal
-exit /b %ERRORLEVEL%
+set CLASSPATH=%APP_HOME%/gradle/wrapper/gradle-wrapper.jar
+"%JAVA_EXE%" %DEFAULT_JVM_OPTS% -cp "%CLASSPATH%" org.gradle.wrapper.GradleWrapperMain %*
+goto end
 
 :fail
-@endlocal
 exit /b 1
+
+:end
