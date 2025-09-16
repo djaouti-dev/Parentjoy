@@ -1,3 +1,4 @@
+
 name: Android Build
 
 on:
@@ -21,10 +22,10 @@ jobs:
           java-version: 17
 
       - name: Make gradlew executable
-        run: chmod +x ./gradlew
+        run: chmod +x Parentjoy/gradlew
 
       - name: Build Debug APK
-        run: ./gradlew :app:assembleDebug
+        run: cd Parentjoy && ./gradlew :app:assembleDebug
         env:
           _JAVA_OPTIONS: "-Xmx2g"
 
@@ -32,10 +33,10 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: parentjoy-apk
-          path: app/build/outputs/apk/debug/app-debug.apk
+          path: Parentjoy/app/build/outputs/apk/debug/app-debug.apk
 
       - name: Build Release AAB
-        run: ./gradlew :app:bundleRelease
+        run: cd Parentjoy && ./gradlew :app:bundleRelease
         env:
           _JAVA_OPTIONS: "-Xmx2g"
 
@@ -43,4 +44,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: parentjoy-aab
-          path: app/build/outputs/bundle/release/*.aab
+          path: Parentjoy/app/build/outputs/bundle/release/*.aab
