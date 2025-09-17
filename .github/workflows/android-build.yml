@@ -1,3 +1,4 @@
+
 name: Android Build
 
 on:
@@ -26,7 +27,7 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Build Debug APK
-        run: ./gradlew assembleDebug
+        run: ./gradlew clean assembleDebug --stacktrace
 
       - name: Upload Debug APK
         uses: actions/upload-artifact@v4
@@ -35,7 +36,7 @@ jobs:
           path: app/build/outputs/apk/debug/app-debug.apk
 
       - name: Build Release AAB
-        run: ./gradlew bundleRelease
+        run: ./gradlew clean bundleRelease --stacktrace
 
       - name: Upload Release AAB
         uses: actions/upload-artifact@v4
